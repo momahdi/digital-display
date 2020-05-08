@@ -106,7 +106,7 @@ componentDidMount(){
 
 }
 handleSubmitbtn=(e)=>{
-  this.setState({text:"Connectiong to Display"})
+  this.setState({text:"Connecting to Display"})
   console.log("hej")
 }
 onKeyPress(event) {
