@@ -151,7 +151,7 @@ render(){
           </div>
           </div>
         <div className = "senttime ">
-        <p>Sent Time</p> 
+        <p>Recived Time</p> 
           <div id="">{this.state.senttime}
           </div>
           </div>
