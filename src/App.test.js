@@ -29,7 +29,9 @@ describe('device module',()=>{
       const expected = {
         text: "test",
         currenttime:new Date().toLocaleString().slice(12.0),
-        senttime:""
+        senttime:"",
+        displaylink:"https://iot-display.herokuapp.com/display/get/",
+        displayid:""
        
       };
       wrapper.instance().handleChange(mockEvent);

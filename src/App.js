@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import './App.css';
 const axios = require('axios');
+
+
 /*const url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4';*/
     const getu = async url => {
       try {
@@ -69,6 +71,7 @@ setInterval(() => {
       }
     };
     this.handleChange(event)
+
   }
 
   var event = {
@@ -98,20 +101,18 @@ componentDidMount(){
 
   }
 
-
-
-
-
-
-
-
-  handleSubmit=(e)=>{
-    e.preventDefault();
-}
-
   handlechange=(e)=>{
     this.setState({displayid:e.target.value})
 
+}
+handleSubmitbtn=(e)=>{
+  this.setState({text:"Connectiong to Display"})
+  console.log("hej")
+}
+onKeyPress(event) {
+  if (event.which === 13 /* Enter */) {
+    event.preventDefault();
+  }
 }
     
 render(){
@@ -120,24 +121,28 @@ render(){
     <div className="App">
       <header className="App-header">
 
-
-      <div className="joingroup">
-                
                 <h5>Enter Diplay ID</h5>
-                <form className ="group-form" onSubmit={this.handleSubmit}>
-                    <input  onChange ={ this.handlechange} 
+               < form onKeyPress={this.onKeyPress}>
+                    <input id="input" onChange ={ this.handlechange} 
                         value={this.state.displayid}
                         placeholder="Enter ID"
                         type="text"/>
-                         </form>
-            </div>
+                        <button type ="button" onClick={e=>this.handleSubmitbtn()} className="send"> 
+                        <img  width="35"
+                            src ={ require('./pictures/search.png')}
+                            alt ={"could not load"}/>
+                        </button>
+                        </form>
+                        
+            
+      
 
 
 
 
         <div className="screen">
         <div className = "text ">
-          <p>Message:</p> 
+          <p></p> 
         <div id="text">{this.state.text}</div>
         </div>
         <div className = "currenttime ">
