@@ -45,7 +45,7 @@ class App extends Component{
       currenttime:new Date().toLocaleString().slice(12.0),
       senttime:"",
       displaylink:"https://iot-display.herokuapp.com/display/get/",
-      displayid:""
+      displayid: ""
       
     }
   }
@@ -151,7 +151,7 @@ render(){
           </div>
           </div>
         <div className = "senttime ">
-        <p>Sent Time</p> 
+        <p>Recieved Time</p> 
           <div id="">{this.state.senttime}
           </div>
           </div>
