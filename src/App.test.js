@@ -25,10 +25,13 @@ describe('device module',()=>{
           value: "test"
         }
       };
-
+      function formatTime(){
+        let now = new Date();
+        return (now.getHours()<10?"0"+now.getHours():now.getHours()) + ":" + (now.getMinutes()<10?"0"+now.getMinutes():now.getMinutes()) + ":" + (now.getSeconds()<10?"0"+now.getSeconds():now.getSeconds())
+      }
       const expected = {
         text: "test",
-        currenttime:new Date().toLocaleString().slice(12.0),
+        currenttime: formatTime(),
         senttime:"",
         displaylink:"https://iot-display.herokuapp.com/display/get/",
         displayid:""

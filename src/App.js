@@ -3,46 +3,17 @@ import React, { Component } from 'react';
 import './App.css';
 const axios = require('axios');
 
-
-/*const url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4';*/
-    const getu = async url => {
-      try {
-        const response = await axios.get(url);
-          var  myData = myData = response.data.display.message.text;
-          stateModule.changeState(myData)
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    var stateModule = (function () {
-      var state; // Private Variable
-    
-      var pub = {};// public object - returned at end of module
-    
-      pub.changeState = function (newstate) {
-          state = newstate;
-      };
-    
-      pub.getState = function() {
-          return state;
-      }
-    
-      return pub; // expose externally
-    }());
-    
-
-
-
-
-
+function formatTime(){
+  let now = new Date();
+  return (now.getHours()<10?"0"+now.getHours():now.getHours()) + ":" + (now.getMinutes()<10?"0"+now.getMinutes():now.getMinutes()) + ":" + (now.getSeconds()<10?"0"+now.getSeconds():now.getSeconds())
+}
 
 class App extends Component{
   constructor(props){
     super(props);
     this.state={
       text: "",
-      currenttime:new Date().toLocaleString().slice(12.0),
+      currenttime: formatTime(),
       senttime:"",
       displaylink:"https://iot-display.herokuapp.com/display/get/",
       displayid: ""
@@ -64,10 +35,11 @@ setInterval(() => {
   var test = stateModule.getState();
  
   if(test!==this.state.text&& test!== undefined){
+  
     var event = {
       target: {
         name: "senttime",
-        value: new Date().toLocaleString().slice(12.0)
+        value: formatTime()
       }
     };
     this.handleChange(event)
@@ -91,10 +63,11 @@ componentDidMount(){
   );
 }
   tick() {
+
     var event = {
       target: {
         name: "currenttime",
-        value: new Date().toLocaleString().slice(12.0)
+        value: formatTime()
       }
     };
     this.handleChange(event)
@@ -121,7 +94,7 @@ render(){
     <div className="App">
       <header className="App-header">
 
-                <h5>Enter Diplay ID</h5>
+                <h5>Enter Display ID</h5>
                < form onKeyPress={this.onKeyPress}>
                     <input id="input" onChange ={ this.handlechange} 
                         value={this.state.displayid}
@@ -133,11 +106,6 @@ render(){
                             alt ={"could not load"}/>
                         </button>
                         </form>
-                        
-            
-      
-
-
 
 
         <div className="screen">
@@ -162,3 +130,30 @@ render(){
 }
 }
 export default App;
+
+
+const getu = async url => {
+  try {
+    const response = await axios.get(url);
+      var  myData = myData = response.data.display.message.text;
+      stateModule.changeState(myData)
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+var stateModule = (function () {
+  var state; // Private Variable
+
+  var pub = {};// public object - returned at end of module
+
+  pub.changeState = function (newstate) {
+      state = newstate;
+  };
+
+  pub.getState = function() {
+      return state;
+  }
+
+  return pub; // expose externally
+}());
